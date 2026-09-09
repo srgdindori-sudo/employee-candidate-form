@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>स्वयंरोजगार विभाग | Employee & Candidate Forms</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap');
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Noto Sans Devanagari", "Nirmala UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255, 193, 7, .12), transparent 28%),
+        radial-gradient(circle at 90% 90%, rgba(123, 31, 162, .10), transparent 30%),
+        linear-gradient(135deg, #fffaf0 0%, #f7f2ff 50%, #fff8ef 100%);
+      color: #24152f;
+      padding: 24px 14px 40px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 980px;
+      margin: auto;
+    }
+
+    /* TOP BRANDING */
+    .hero {
+      text-align: center;
+      padding: 18px 12px 24px;
+    }
+
+    .swami-logo {
+      width: 82px;
+      height: 82px;
+      margin: 0 auto 10px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      font-weight: 800;
+      color: #7b1fa2;
+      background: linear-gradient(145deg, #fff, #fff3cf);
+      border: 3px solid #d99b19;
+      box-shadow: 0 10px 28px rgba(92, 45, 0, .18);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(28px, 5vw, 46px);
+      font-weight: 800;
+      letter-spacing: .3px;
+      background: linear-gradient(90deg, #7b1fa2, #a52c74, #c77700);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero .sub-title {
+      margin: 5px 0 20px;
+      font-size: clamp(15px, 2.7vw, 22px);
+      font-weight: 600;
+      color: #5e3b68;
+    }
+
+    .department {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 24px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #6a1b9a, #8e24aa);
+      color: #fff;
+      box-shadow: 0 9px 25px rgba(106, 27, 154, .25);
+    }
+
+    .dept-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.35);
+      font-size: 22px;
+    }
+
+    .department strong {
+      display: block;
+      font-size: clamp(21px, 4vw, 30px);
+      line-height: 1.2;
+    }
+
+    .department small {
+      display: block;
+      opacity: .9;
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    /* FORM CARDS */
+    .forms {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 18px;
+    }
+
+    .form-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      padding: 26px;
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(118, 75, 0, .13);
+      box-shadow: 0 16px 42px rgba(44, 24, 58, .12);
+      backdrop-filter: blur(8px);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .form-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 48px rgba(44, 24, 58, .17);
+    }
+
+    .form-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 6px;
+      background: linear-gradient(90deg, #7b1fa2, #d99b19);
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .company-logo,
+    .candidate-logo {
+      width: 68px;
+      height: 68px;
+      flex: 0 0 68px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      font-weight: 800;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
+    }
+
+    .company-logo {
+      color: #7b1fa2;
+      background: linear-gradient(145deg, #f5e7ff, #fff);
+    }
+
+    .candidate-logo {
+      color: #b06a00;
+      background: linear-gradient(145deg, #fff0cf, #fff);
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 800;
+      color: #321b3d;
+    }
+
+    .english-title {
+      margin: 2px 0 0;
+      font-size: 13px;
+      font-weight: 600;
+      color: #8a728f;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+    }
+
+    .description {
+      min-height: 82px;
+      margin: 0 0 22px;
+      color: #5b4a60;
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .description strong { color: #3d2148; }
+
+    .open-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 13px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 800;
+      box-shadow: 0 9px 20px rgba(106,27,154,.20);
+      transition: filter .2s ease, transform .2s ease;
+    }
+
+    .open-btn:hover {
+      filter: brightness(1.07);
+      transform: translateY(-1px);
+    }
+
+    .employee-btn {
+      background: linear-gradient(90deg, #6a1b9a, #9c27b0);
+    }
+
+    .candidate-btn {
+      background: linear-gradient(90deg, #b66a00, #df961a);
+      box-shadow: 0 9px 20px rgba(182,106,0,.20);
+    }
+
+    .arrow { font-size: 21px; }
+
+    .footer {
+      text-align: center;
+      margin-top: 28px;
+      color: #806d84;
+      font-size: 12px;
+    }
+
+    @media (max-width: 700px) {
+      body { padding: 12px 10px 28px; }
+      .hero { padding-top: 10px; }
+      .forms { grid-template-columns: 1fr; gap: 16px; }
+      .form-card { padding: 21px; }
+      .description { min-height: auto; }
+      .department { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+
+    <header class="hero">
+      <div class="swami-logo" aria-label="श्री स्वामी समर्थ">ॐ</div>
+
+      <h1>श्री स्वामी समर्थ</h1>
+      <p class="sub-title">श्री स्वामी समर्थ सेवा व आध्यात्मिक विकास मार्ग</p>
+
+      <div class="department">
+        <div class="dept-logo">◆</div>
+        <div>
+          <strong>स्वयंरोजगार विभाग</strong>
+          <small>SELF EMPLOYMENT DEPARTMENT</small>
+        </div>
+      </div>
+    </header>
+
+    <section class="forms" aria-label="फॉर्म निवड">
+
+      <!-- EMPLOYEE FORM -->
+      <article class="form-card">
+        <div class="card-head">
+          <div class="company-logo" aria-label="Company Logo">▣</div>
+          <div>
+            <h2 class="card-title">Employee Form</h2>
+            <p class="english-title">Company Registration</p>
+          </div>
+        </div>
+
+        <p class="description">
+          <strong>कंपनी फॉर्म</strong> — कंपनीची आवश्यक माहिती,
+          व्यवसायाशी संबंधित तपशील व कर्मचारीविषयक नोंदणी करण्यासाठी
+          हा अर्ज भरा.
+        </p>
+
+        <a class="open-btn employee-btn"
+           href="https://docs.google.com/forms/d/e/1FAIpQLSdgd94xLf8G9QSprjpt-O5Si66l5a4nwmJncxXx3cMhXK6mLQ/viewform?usp=publish-editor"
+           target="_blank" rel="noopener">
+          कंपनी फॉर्म उघडा <span class="arrow">→</span>
+        </a>
+      </article>
+
+      <!-- CANDIDATE FORM -->
+      <article class="form-card">
+        <div class="card-head">
+          <div class="candidate-logo" aria-label="Candidate Logo">♙</div>
+          <div>
+            <h2 class="card-title">Candidate Form</h2>
+            <p class="english-title">Candidate Registration</p>
+          </div>
+        </div>
+
+        <p class="description">
+          <strong>उमेदवार नोंदणी अर्ज</strong> — रोजगाराच्या संधींसाठी
+          उमेदवाराची वैयक्तिक, शैक्षणिक व कौशल्यविषयक माहिती
+          नोंदविण्यासाठी हा अर्ज भरा.
+        </p>
+
+        <a class="open-btn candidate-btn"
+           href="https://docs.google.com/forms/d/e/1FAIpQLSfNE_OG4nC0ExQ_u4SYm7hkytidgrni465pZ0RCuHR9XwSHDA/viewform?usp=publish-editor"
+           target="_blank" rel="noopener">
+          उमेदवार फॉर्म उघडा <span class="arrow">→</span>
+        </a>
+      </article>
+
+    </section>
+
+    <footer class="footer">
+      © स्वयंरोजगार विभाग • Online Form Portal
+    </footer>
+
+  </main>
+</body>
+</html>
